@@ -6,7 +6,8 @@ import sys, markdown, requests, bs4 as BeautifulSoup
 
 def check_url(url):
     try:
-        return bool(requests.head(url, allow_redirects=True))
+        return bool(requests.head(url, allow_redirects=True)) \
+            or bool(requests.get(url, allow_redirects=True))
     except Exception as e:
         print ('Error checking URL %s: %s' % (url, e))
         return False
