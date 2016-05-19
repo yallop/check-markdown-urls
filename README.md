@@ -1,0 +1,1 @@
+A script for checking URLs in markdown documents, used in collaborative online bibliographies such as [effects-bibliography](https://github.com/yallop/effects-bibliography) and [popl2015-papers](https://github.com/yallop/popl2015-papers).
