@@ -4,10 +4,13 @@
 
 import sys, markdown, requests, bs4 as BeautifulSoup
 
+headers = {'User-Agent':
+           'Mozilla/5.0 (X11; Ubuntu; Linux i686 on x86_64; rv:41.0) Gecko/20100101 Firefox/41.0'}
+
 def check_url(url):
     try:
-        return bool(requests.head(url, allow_redirects=True)) \
-            or bool(requests.get(url, allow_redirects=True))
+        return bool(requests.head(url, allow_redirects=True, headers=headers)) \
+            or bool(requests.get(url, allow_redirects=True, headers=headers))
     except Exception as e:
         print ('Error checking URL %s: %s' % (url, e))
         return False
