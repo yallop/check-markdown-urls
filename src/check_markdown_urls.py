@@ -9,8 +9,8 @@ headers = {'User-Agent':
 
 def check_url(url):
     try:
-        return bool(requests.head(url, allow_redirects=True, headers=headers)) \
-            or bool(requests.get(url, allow_redirects=True, headers=headers))
+        return requests.head(url, allow_redirects=True, headers=headers) \
+            or requests.get(url, allow_redirects=True, headers=headers)
     except Exception as e:
         print ('Error checking URL %s: %s' % (url, e))
         return False
@@ -26,11 +26,12 @@ def check_urls(filename):
     print ('checking URLs for %s' % (filename,))
     ok = True
     for url in retrieve_urls(filename):
-        msg = 'Checking %s => ' % (url,)
-        if check_url(url):
-            print (msg + 'OK')
+        msg = 'Checking %s =>' % (url,)
+        response = check_url(url)
+        if response:
+            print ('%s OK' % (msg,))
         else:
-            print (msg + 'FAILED')
+            print ('%s FAILED (%s: %s)' % (msg, response.status_code, response.reason))
             ok = False
     return ok
 
